@@ -6402,6 +6402,16 @@ static void lsp_cmd_toggle_options()
 			lsp_prompt = "Verification of references turned OFF.";
 
 		break;
+	case 'm':
+		lsp_mouse_mode = !lsp_mouse_mode;
+		if (lsp_mouse_mode) {
+			mousemask(ALL_MOUSE_EVENTS, NULL);
+			lsp_prompt = "Handling mouse events turned ON.";
+		} else {
+			mousemask(0, NULL);
+			lsp_prompt = "Handling mouse events turned OFF.";
+		}
+		break;
 	} /* switch() */
 }
 
