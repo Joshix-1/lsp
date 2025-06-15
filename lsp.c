@@ -2670,8 +2670,10 @@ static int lsp_init_screen()
 	noecho();
 	keypad(stdscr, TRUE);
 
-	new_mask = ALL_MOUSE_EVENTS;
-	mousemask(new_mask, &old_mask);
+	if (lsp_mouse_mode) {
+		new_mask = ALL_MOUSE_EVENTS;
+		mousemask(new_mask, &old_mask);
+	}
 
 	if (lsp_color)
 		wbkgd(lsp_win, COLOR_PAIR(LSP_DEFAULT_PAIR));
@@ -7200,6 +7202,7 @@ static void lsp_process_options(int argc, char *argv[])
 		{"verify-command",	required_argument,	0, '2'},
 		{"verify-with-apropos", no_argument,		0, '3'},
 		{"keep-cr",		no_argument,		0, '4'},
+		{"no-mouse",		no_argument,		0, '5'},
 		{0,			0,			0,  0 }
 	};
 
@@ -7234,6 +7237,10 @@ static void lsp_process_options(int argc, char *argv[])
 		case '4':
 			/* --keep-cr */
 			lsp_keep_cr = true;
+			break;
+		case '5':
+			/* --no-mouse */
+			lsp_mouse_mode = false;
 			break;
 		case 'a':
 			lsp_load_apropos = true;
@@ -7418,6 +7425,7 @@ static void lsp_init()
 	lsp_verify_with_apropos = false;
 
 	lsp_keep_cr = false;
+	lsp_mouse_mode = true;
 
 	lsp_verify = true;
 

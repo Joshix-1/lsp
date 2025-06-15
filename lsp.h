@@ -647,6 +647,10 @@ bool	lsp_auto_reloads = true;
    Depends on terminal capabilities; --no-color also turns this off */
 bool	lsp_color;
 
+/* Enable usage of mouse.
+   Can be turned off with --no-mouse */
+bool	lsp_mouse_mode;
+
 /* Command to execute to load a manual page. */
 char	*lsp_load_man_command;
 /* Command used to verify references. */
