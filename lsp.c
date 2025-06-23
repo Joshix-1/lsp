@@ -7213,11 +7213,12 @@ static void lsp_process_options(int argc, char *argv[])
 		{"verify-with-apropos", no_argument,		0, '3'},
 		{"keep-cr",		no_argument,		0, '4'},
 		{"no-mouse",		no_argument,		0, '5'},
+		{"mouse",		no_argument,		0, 'm'},
 		{0,			0,			0,  0 }
 	};
 
 	while (1) {
-		opt = getopt_long(argc, argv, "achiIl:no:rs:Vv",
+		opt = getopt_long(argc, argv, "achiIl:mno:rs:Vv",
 				  long_options, &long_index);
 
 		if (opt == -1)
@@ -7252,6 +7253,9 @@ static void lsp_process_options(int argc, char *argv[])
 			/* --no-mouse */
 			lsp_mouse_mode = false;
 			break;
+		case 'm':
+			/* --mouse */
+			lsp_mouse_mode = true;
 		case 'a':
 			lsp_load_apropos = true;
 			if (optarg)
